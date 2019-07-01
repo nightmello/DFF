@@ -1,10 +1,13 @@
-import torch, math, time
+import math
+import time
+
+import torch
 
 EPSILON = 1e-7
 
+
 # NMF by multiplictive updates
 def NMF(V, k, W=None, H=None, random_seed=None, max_iter=200, tol=1e-4, cuda=True, verbose=False):
-
     if verbose:
         start_time = time.time()
 
@@ -50,7 +53,7 @@ def NMF(V, k, W=None, H=None, random_seed=None, max_iter=200, tol=1e-4, cuda=Tru
     VH = None
     HH = None
     for n_iter in range(max_iter):
-        W, H, VH, HH = multiplicative_update_step(V, W, H, update_H=update_H, VH = VH, HH = HH)
+        W, H, VH, HH = multiplicative_update_step(V, W, H, update_H=update_H, VH=VH, HH=HH)
         if tol > 0 and n_iter % 10 == 0:
             error = approximation_error(V, W, H, square_root=True)
 
@@ -58,7 +61,7 @@ def NMF(V, k, W=None, H=None, random_seed=None, max_iter=200, tol=1e-4, cuda=Tru
                 break
             previous_error = error
     if verbose:
-        print('Exited after {} iterations. Total time: {} seconds'.format(n_iter+1, time.time()-start_time))
+        print('Exited after {} iterations. Total time: {} seconds'.format(n_iter + 1, time.time() - start_time))
     return W, H
 
 
