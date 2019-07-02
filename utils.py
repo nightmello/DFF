@@ -129,5 +129,5 @@ def save_mask2d(masks, K, bird_dir):
             np.putmask(tmp, mask > 0.9, 1)
             out_point[k] = center_of_mass(tmp)
 
-        path = os.path.join(bird_dir, 'bird_point_mask_{0:03d}_{1}_{2}.npz'.format(bird_dir.split('_')[-1], K, i))
+        path = os.path.join(bird_dir, 'bird_point_mask_{0}_{1}_{2}.npz'.format(bird_dir.split('_')[-1], K, i))
         np.savez_compressed(path, out_point, out_mask)
